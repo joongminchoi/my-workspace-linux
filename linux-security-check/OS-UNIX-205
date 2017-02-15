@@ -1,0 +1,23 @@
+만기도래 패스워드를 사전에 권고하여 패스워드 변경을 권고함.
+
+패스워드가 만기 경고는 7일 이상으로 설정되어 있으면 양호
+
+[AIX] 
+# vi /etc/security/user 파일 'pwdwarntime ' 값 확인 
+pwdwarntime=7 (이상 PASS) 
+
+[HP-UX] 
+# vi /etc/default/security 파일 'PASSWORD_WARNDAYS' 값 확인 
+PASSWORD_WARNDAYS = 7 (이상 PASS) 
+
+[SOLARIS] 
+# vi /etc/default/passwd 파일 ‘WARNWEEKS’ 값 확인 
+WARNWEEKS = 2 (이상 PASS) 
+
+[LINUX] 
+# vi /etc/login.defs PASS_WARN_AGE 7 (이상 PASS) 값 확인
+
+ [LINUX] [Ubuntu]
+
+/etc/login.defs 파일의 PASS_WARN_AGE 파일의 값을 7일 이상으로 설절한다.
+    PASS_WARN_AGE  7

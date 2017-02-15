@@ -1,0 +1,14 @@
+1.X-service 접근설정이 존재하면 양호 /usr/dt/config/Xaccess (CDE) /usr/openwin/lib/xdm/Xaccess (Openwindow) 
+2.Line이 주석처리되어있으면 양호 #grant service to all remote displays #any indirect host can get a chooser
+
+[공통] 
+/usr/dt/config/Xaccess (CDE), /usr/openwin/lib/xdm/Xaccess (Openwindow)를 vi로 오픈하여 파일내 아래 두라인을 comment(#)처리되었는지 확인 
+# grant service to all remote displays CHOOSER BROADCAST #any indirect host can get a chooser 접근제어를 하고자 하는 IP 등록 여부 확인
+
+ [공통] 
+/usr/dt/config/Xaccess (CDE), /usr/openwin/lib/xdm/Xaccess (Openwindow)를 vi로 오픈하여 파일내 아래 두라인을 comment(#) 한다 
+# grant service to all remote displays CHOOSER BROADCAST 
+# any indirect host can get a chooser 접근제어를 하고자 하는 IP를 입력한다. 
+예) 156.147.x.x Appl.서버담당자 
+
+#/usr/dt/bin/dtconfig -reset 으로 설정 값을 적용

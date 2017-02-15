@@ -1,0 +1,31 @@
+/etc/exports 내의 access lists가 하나라도 있으면 취약
+
+[AIX/HP/LINUX] 
+- HP-UX, AIX, Linux System 퍼미션 권장값 확인 
+-rw-r―r-- root sys /etc/exports AIX) nfs 관련 데몬확인 
+$ lssrc -a |grep nfs biod nfs 475164 활성 
+rpc.statd nfs 528418 활성 
+rpc.lockd nfs 397550 활성 
+nfsd nfs 1773772 활성 
+rpc.mountd nfs 1913026 활성 
+nfsrgyd nfs 작동 불능 
+gssd nfs 작동 불능 
+
+[SUN] 
+SOLARIS System 퍼미션 권장값 확인 
+-rw-r--r-- root sys /etc/dfs/dfstab # vi /etc/dfs/dfstab share -F nfs -o ro=client /public
+ 
+[LINUX] 
+/etc/exports 내용 확인 ACL에 " (","*" 문자등이 포함되면 취약함 접속서버 설정이 없거나 대역으로 설정되면 취약
+
+ [LINUX] 
+- HP-UX, AIX, Linux System 퍼미션 권장값으로 수정 
+chmod 644 -rw-r―r-- root sys /etc/exports 
+
+*nfs된 파일시스템 확인법 
+1.vi /etc/exports 
+2.exportfs -a 명령어 실행 -> 파일 엑스포트를 알리는 것이지 nfs 되었다고는 볼수 없음. 
+3.showmount -e 로 확인. 
+
+* nfs된 파일시스템 제거하기 
+smitty rmnfsexp => /etc/exports 라인삭제 또는 exportfs -u /dirname

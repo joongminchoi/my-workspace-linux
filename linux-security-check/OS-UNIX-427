@@ -1,0 +1,34 @@
+smbd 프로세스 수행시
+/etc/samba/smb.conf 의 공유 디렉토리 설정에서 browseable 설정을 no 로 설정
+                                   "browseable=" 은 browseable=no와 동일
+
+sms.conf 위치 smbd -b |grep smb.conf
+
+또는
+
+[Linux]
+/etc/samba/smb.conf(패키지)
+/usr/local/samba/lib/smb.conf(컴파일 버전)
+
+[Sun]+G58
+/opt/csw/etc/samba/smb.conf
+/etc/sfw/smb.conf
+
+[AIX]
+/opt/pware64/lib/smb.conf
+/opt/pware/lib/smb.conf
+/opt/pware/samba/<version>/smb.conf
+      -  /opt/pware/samba/3.0.26a/lib/smb.conf
+/usr/lib/smb.conf
+/usr/local/lib/smb.conf
+/usr/local/samba/lib/smb.conf
+
+[HPUX]
+/etc/opt/samba/smb.conf
+
+1) browseable 항목이 있는 경우
+browseable=yes 인 경우만 FAIL
+browseable= 이거나 아무거나 있으면 PASS
+
+2) browseable 항목이 없는 경우
+    FAIL

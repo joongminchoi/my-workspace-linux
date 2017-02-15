@@ -1,0 +1,40 @@
+smbd 프로세스 수행시
+
+/etc/samba/smb.conf 파일 내 guest ok = no 설정하거나
+                                   guest ok 가 없는 경우 public = no 로 설정
+                                   "guest ok = "는 "guest ok = no" 와 동일
+                                   "public = "는 "public = no" 와 동일
+
+sms.conf 위치 smbd -b |grep smb.conf
+
+또는
+ 
+[Linux]
+/etc/samba/smb.conf(패키지)
+/usr/local/samba/lib/smb.conf(컴파일 버전)
+
+[Sun]
+/opt/csw/etc/samba/smb.conf
+/etc/sfw/smb.conf
+
+[AIX]
+/opt/pware64/lib/smb.conf
+/opt/pware/lib/smb.conf
+/opt/pware/samba/<version>/smb.conf
+      -  /opt/pware/samba/3.0.26a/lib/smb.conf
+/usr/lib/smb.conf
+/usr/local/lib/smb.conf
+/usr/local/samba/lib/smb.conf
+
+[HPUX]
+/etc/opt/samba/smb.conf
+
+1. guest ok가 있는 경우
+guest ok = yes 인 경우만 FAIL
+guest ok = 이거나 아무거나 넣어도 PASS
+
+2. guest ok가 없는 경우는
+public=yes 인 경우만 FAIL
+public = 이거나 아무거나 넣어도 PASS
+
+3. guest ok, public 모두 없는 경우PASS

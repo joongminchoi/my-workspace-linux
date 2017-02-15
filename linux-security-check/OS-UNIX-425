@@ -1,0 +1,32 @@
+"* 원격 접근 제어 설정 파일이 존재하고 권한이 아래와 같으면 양호 
+/etc/hosts.allow 0644 
+/etc/hosts.deny 0644 /
+etc/hosts.deny 파일은 반드시 존재하고, 
+
+파일내용중 /etc/hosts.deny 파일에는 "ALL:ALL" 설정이 있어야 PASS 처리
+
+ - hosts.deny 파일에 ALL:ALL 이 설정되어 있는 경우 hosts.allow 파일에 반드시
+접속해야 할 IP가 등록되어 있어야 함.
+
+- hosts.deny 파일에 ALL:ALL 설정 후 hosts.allow 파일에 허용 IP를 등록하지 않을 경우 외부에서 접속이 불가.
+
+예) /etc/hosts.allow
+sshd: 10.10.10.0/255
+
+
+[공통] 
+각 파일의 설정 권한 확인
+
+[공통]
+1) /etc/hosts.allow 파일과 /etc/hosts.deny 파일을 확인하여 없으면 생성합니다.  파일 mode는 644로 설정합니다.
+2) 모든 서비스, ip에 대해 접근허용을 막기 위해 /etc/hosts.deny에 ALL : ALL 을 작성합니다. → 이렇게 되면 모든 서비스, 모든 IP에 대해 접근이 제한됩니다.
+    단, 특정 IP, 특정 서비스에 대해서만 접근을 허용하기 위해선 /etc/hosts.allow 파일에 작성하면 됩니다. → 파일작성 후 설정을 해야 접속이 됩니다.
+    /etc/hosts.allow 파일 작성 요령은
+   
+   예를 들어 
+
+   - sshd를 192.168.0.100, 192.168.0.101 ip에 허용하려면 /etc/hosts.allow 파일에  sshd: 192.168.0.100, 192.168.0.101 를 추가합니다.
+    - ftp는 /etc/hosts.allow 파일에 in.ftpd: 192.168.0.100, 192.168.0.101 를 추가합니다.
+    - telnet은 /etc/hosts.allow 파일에 in.telnetd: 192.168.0.100, 192.168.0.101 를 추가합니다.
+ 
+3) inetd 서비스를 restart 합니다.

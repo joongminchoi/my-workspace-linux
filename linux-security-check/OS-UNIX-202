@@ -1,0 +1,43 @@
+패스워드 추측 공격을 피하기 위하여 패스워드 최소 길이가 설정되어 있는지 점검. 패스워드 최소길이가 설정되어 있지 않거나 짧게 설정되어 있을 경우 취약한 패스워드를 사용함으로써 인해 악의적인 사용자가 패스워드를 쉽게 유추할 수 있음.
+
+계정 암호 최소 길이는 8글자 보다 작으면 취약
+[AIX] 
+# cat /etc/security/user 파일 minlen 값 확인 
+minlen = 8 
+
+[HP-UX] 
+# cat /etc/default/security 파일 MIN_PASSWORD_LENGTH 값 확인 
+MIN_PASSWORD_LENGTH=8 
+
+[SOLARIS] 
+# cat /etc/default/passwd 파일 PASSLENGTH 값 확인 
+PASSLENGTH=8 
+
+[LINUX] 
+# cat /etc/login.defs 파일 PASS_MIN_ LEN 값 확인 
+PASS_MIN_ LEN 8 (패스워드 길이가 8자리 이상확인)
+
+[LINUX-Ubuntu]
+# cat /etc/pam.d/common-password 파일 내의 아래 항목 확인
+# here are the per-package modules (the "Primary" block)
+password        [success=2 default=ignore]      pam_unix.so obscure sha512
+위의 값에서 min=8  과 같은 항목이 존재하는 지 확인
+
+
+[LINUX]
+1)	/etc/login.defs 파일을 아래와 같이 설정.
+변경 전) PASS_MIN_LEN    5
+변경 후) PASS_MIN_LEN    8
+
+[Uubuntu]
+     /etc/pam.d/common-password 파일의 설정을 변경한다.
+     변경)  password      requisite      pam_cracklib.so retry=3 minlen=8 difok=3      
+     주의 1) common-password 파일에 내용을 추가할 경우 “Enter”을 입력하여 라인을 변경하여 추가하면 안되고, 반드시 이어진 라인으로 추가하여야 한다.
+           Common-password 파일은 매우 중요한 파일이므로 반드시 변경전 파일을 백업후 변경한다.
+     주의 2) common-password 파일 변경 후 password 변경시 아래 메시지가 발생할 경우
+           itops@ubunto11:~$ passwd
+passwd: Module is unknown
+passwd: password unchanged
+          위의 경우는 common-password 파일에 libarary 파일의 명칭이 잘못 된 경우 발생합니다.  다음의 password 관련 library 모듈이 정상적으로 typing 되어 있는지 확인 부탁드립니다.
+            pam_cracklib.so  pam_pwhistory.so 
+           위의 추가되는 library 파일의 Name이 정확히 key in 되어야 합니다.

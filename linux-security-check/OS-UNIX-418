@@ -1,0 +1,11 @@
+process lists 에서 snmp 데몬 검사하여 존재하면 취약
+
+[AIX] 
+ps -ef|grep snmp #vi /etc/inetd.conf 파일 확인 "#"snmp - snmp "#" 존재 여부를 확인한다. 
+
+[HP] n/a 
+[SUN] n/a 
+[LINUX] n/a
+
+ [LINUX]
+ n/a

@@ -1,0 +1,9 @@
+rsh, rlogin, rexec 등의 'r' commands는 인증 없이 관리자의 원격접속이 가능하게 하는 명령어들로, NET Backup 이나 다른 용도로 사용되는 경우가 있으나 'r' command의 사용은 보안상 매우 취악하여, 서비스 포트가 열려 있으면 침해사고의 위험성이 있음.
+
+* r명령어 설정파일의 접근 권한이 아래와 다르면 취약 /etc/hosts.equiv 0644 및 소유자 root 사용자 $HOME/.rhosts 0644
+
+[공통] 
+접근권한확인 ls -al /etc/hosts.equiv ls -al 사용자 HOME 디렉토리/.rhosts
+
+ [공통]
+ chmod 명령어로 접근권한 변경

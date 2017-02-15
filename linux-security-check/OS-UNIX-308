@@ -1,0 +1,15 @@
+시스템 내에서 유저가 새로이 생성하는 파일의 접근 권한은 umask에 따라 달라짐. 현재의 유저에게 설정된 umask를 조회하려면, 명령 프롬프트에서 “umask”를 수행하면 됨. 그리고 umask 값이 “022”이기를 권장함.
+Umask 값 “022”sms “rw-r―r―“ 접근 권한으로 파일이 생성됨.
+
+Umask 을 “022”로 변경하여야 함.
+
+umask 명령어를 사용하여 현재 설정된 UMASK 값이 022면 양호
+
+[공통] 
+umask 명령어를 사용하여 현재 설정된 UMASK 값이 022인지 점검 # umask 또는 # su - root -c 'umask' 명령어 수행 결과 확인 
+# 0022 또는 022 # 0022 logout
+
+ [LINUX] 
+시스템환경파일 
+# vi /etc/profile, /etc/.login 파일에서 umask 값을 022로 설정 사용자
+$HOME 환경파일 .cshrc .login .profile .bash_profile .kshrc .tcshrc 파일에서 umask 값을 022로 설정

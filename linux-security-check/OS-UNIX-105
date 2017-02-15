@@ -1,0 +1,57 @@
+Root user로 직접 서버에 접속하면, 실제 어느 사용자가 접속하였는지 확인이 불가능하며, 사용자 감사 추적이 어려워 원칙적으로 root의 직접 접속을 제한함.
+
+/etc/securetty ( /etc/security/login.cfg /etc/security/user /etc/default/security /etc/default/login /etc/pam.d/login ) 관련 설정 파일 내 root 원격 접속 허용이면 취약 
+*(telnet, ftp, ssh 확인)
+
+[AIX] 
+# cat /etc/security/login.cfg 파일 확인 
+/dev/console : synonym=/dev/tty0 (/dev/tty0는 /dev/console 을 의미함) 
+또는,# cat /etc/security/user 파일 확인
+login=false, rlogin = false, su=true # cat /etc/security/login.cfg 파일 확인 
+/dev/console : synonym=/dev/tty0 (/dev/tty0는 /dev/console 을 의미함) 
+또는,# cat /etc/security/user 파일 확인 
+login=false, rlogin = false, su=true 
+
+[HP-UX] 
+# vi /etc/default/security 에서 console 이란 값을 확인한다. 
+
+[SOLARIS] 
+# vi /etc/default/login 파일에서 CONSOLE값을 확인한다. 
+CONSOLE=/dev/console항목 Remark(#) 없앰 
+
+[LINUX] 
+# vi /etc/pam.d/login 파일 확인 
+#auth required /lib/security/pam_securetty.so
+
+[LINUX-Ubuntu]
+1) ssh 사용 시
+    /etc/ssh/sshd_config (ssh)  파일에서 아래 Parameter 확인
+       PermitRootLogin 확인  (22 port 사용시)
+      - no 아니면 FAIL
+2) telnet 사용 시
+    /etc/pam.d/login (telnet) 파일에서 아래 Parameter 확인
+    auth * pam_securetty.so 확인 (23 port 사용시)
+      - 존재하지 않으면 FAIL
+    /etc/securetty(telnet) 
+     pts 존재시 FAIL (23 port 사용시)
+
+
+ [LINUX] 
+# vi /etc/pam.d/login 파일 수정 
+변경 전
+#auth required /lib/security/pam_securetty.so 
+변경 후 
+auth required /lib/security/pam_securetty.so
+
+[LINUX-Ubuntu]
+1)  /etc/ssh/sshd_config 파일에서 PermitRootLoin의 설정 내용을  아래와 같이 변경하여 저장한다.
+        변경전)
+         #PermitRootLogin yes
+        변경후) - # 주석 제거후 파라메터 값 변경
+        PermitRootLogin no
+
+2)  sshd 서비스를 restart 한다.
+# cd /etc/init.d
+# ./ssh restart
+
+3)  Putty 등 sshd terminal 프로그램을 이용하여 root user로 직접 접속되는지 확인한다.

@@ -1,0 +1,13 @@
+/etc/cron.allow 0640 
+/etc/cron.deny 0640 
+/etc/at.allow 0640 
+/etc/at.deny 0640 이하 (파일이 있는 경우)
+
+[공통] 
+# ls -l 명령으로 확인 -rw-r--r-- 1 root sys 14112 1월 16 2001 cron.allow -rw-r--r-- 1 root sys 14112 1월 16 2001 cron.deny
+
+[공통] 
+파일의 퍼미션을 바꾸어 줌. 
+
+# chmod 640 cron.allow 
+# chmod 640 cron.deny

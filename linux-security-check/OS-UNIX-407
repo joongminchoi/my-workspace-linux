@@ -1,0 +1,18 @@
+rsh, rlogin, rexec 등의 'r' commands는 인증 없이 관리자의 원격접속이 가능하게 하는 명령어들로, NET Backup 이나 다른 용도로 사용되는 경우가 있으나 'r' command의 사용은 보안상 매우 취악하여, 서비스 포트가 열려 있으면 침해사고의 위험성이 있음.
+
+* shell, login, exec 서비스를 사용하면 취약
+
+[AIX/HP-UX/SOLARIS] 
+/etc/inetd.conf 파일에서 아래의 불필요한 서비스항목을 Remark(#) 처리되었는지 확인 
+
+[SOLARIS 10] 
+# svcs -a | egrep "rlogin|shell|exec" 으로 disable인지 조회함 
+disabled Jul_27 svc:/network/login:rlogin disabled Jul_27 svc:/network/rexec:default disabled Jul_27 svc:/network/shell:default disabled Jul_27 svc:/network/shell:kshell 
+
+[LINUX] 
+리눅스 7.X 이상은 xinetd를 사용하므로 chkconfig --list 으로 서비스 확인
+
+  [LINUX] 
+1. /etc/xinetd.d/xxxx 파일 수정 
+2. disable = no 수정 
+3. service xinetd restart

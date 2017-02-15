@@ -1,0 +1,22 @@
+가장 많이 쓰이는 서비스인 telnet 이나 ftp 에 대하여 접근제어를 하지 않을 경우 비인가된 사용자에 의한 접근이 시도될 수 있음
+
+tcp wrapper 실행중이면 양호 
+LINUX는 ldd $(which sshd) | grep libwrap 결과 ldd $(which xinetd) | grep libwrap 결과 libwrap.so.0 => /lib64/libwrap.so.0 처럼 libwrap가 존재하면 PASS 
+strings $(which portmap) | grep hosts 결과 /etc/hosts.allow /etc/hosts.deny 둘다 존재하면 PASS 
+
+SUN 5,10 inetd 실행중이지 않으면 FAIL 
+inetadm -l telnet |grep tcp_wrappers inetadm -l ftp |grep tcp_wrappers default tcp_wrappers=TRUE 또는 tcp_wrappers=TRUE 존재하면 PASS 
+HP, AIX, SUN (5.9 이하) inetd 실행 중이지 않으면 FAIL 
+/etc/inetd.conf telnet라인에 tcpd 설정 되어 있지 않으면 FAIL 
+/etc/inetd.conf ftp 라인에 tcpd 설정 되어 있지 않으면 FAIL
+
+  [리눅스] 
+/etc/hosts.allow 및 hosts.deny 파일 수정 
+# vi /etc/hosts.deny ALL:ALL 또는 예) -rw-r--r-- root other 
+/etc/hosts.allow -rw-r--r-- root other /etc/hosts.deny 
+
+#vi /etc/hosts.allow 
+in.telnetd: <접근을 허용하는 서버 IP>
+in.ftpd: <접근을 허용하는 서버 IP> 
+
+# vi /etc/hosts.deny in.telnetd: ALL in.ftpd: ALL

@@ -1,0 +1,31 @@
+anonymous사용자가 ftp이외의 시스템에 정상적으로 로그인하지 못하도록 해야 한다 process lists 에서 ftp 데몬 없으면 양호 존재하는 경우에는 anonymous 접근 불가시 양호 환경 설정 실수로 인한 잘못된 권한 획득 및 정보유출
+
+[AIX/SOLARIS/LINUX] 
+# vi /etc/passwd 파일의 로그인 shell을 /bin/false로 변경되었는지 확인 
+ftp:x:400:400:Anonymous FTP:/var/spool/ftp:/bin/false 
+
+[ HP] 
+ftp home의 file, directory의 owner가 ftp user여서는 안되며 최소권한만 부여되었는지 확인 한다. 
+ftp home에 .rhosts 와 .forward 가 존재 유무 확인 한다 ~ftp/etc에 group, passwd file 및 netconfig 파일을 생성되었는지 확인 한다
+
+
+[리눅스예시] 
+1.익명 접속을 제한 한다. 
+[root@localhost vsftpd]# vi /etc/vsftpd/vsftpd.conf 
+# Allow anonymous FTP? (Beware - allowed by default if you comment this out). 
+anonymous_enable=NO 
+
+2.vsftpd 서비스를 재시작한다. 
+[root@localhost vsftpd]# /etc/init.d/vsftpd restart 
+vsftpd를 종료 중: [ OK ] 
+vsftpd에 대한 vsftpd을 시작 중: [ OK ] 
+[root@localhost vsftpd]# 
+
+ [LINUX] 
+# vi /etc/passwd 파일의 로그인 shell을 /bin/false로 변경 
+ftp:x:400:400:Anonymous FTP:/var/spool/ftp:/bin/false
+
+아래의 설정 파일을 수정한 후 vsftpd 서비스를 restart 한다.
+# vi /etc/vsftpd/vsftpd.conf 
+# Allow anonymous FTP? (Beware - allowed by default if you comment this out). 
+anonymous_enable=NO

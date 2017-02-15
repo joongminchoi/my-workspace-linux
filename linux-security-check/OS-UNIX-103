@@ -1,0 +1,7 @@
+사용자간 UID가 중복 시에 사용자 감사 추적이 어렵고, 사용자 권한이 중복됨
+Log-in 가능한 ID중 /etc/passwd파일의 UID가 중복되는 사용자가 존재하면 취약
+
+# cat /etc/passwd 파일의 세 번째 필드인 UID 값이 중복되는 사용자가 있는지 확인한다.
+
+[LINUX] 
+# usermod -u 501 user1 명령어를 이용해 user1에게 올바른 uid 번호를 부여한다.

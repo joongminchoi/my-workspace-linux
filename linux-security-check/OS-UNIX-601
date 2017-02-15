@@ -1,0 +1,34 @@
+Linux 는 서버에 설치된 패치 리스트의 관리가 불가능함. 따라서 rpm패키지별 버그 Fix 된 최신의 버전을 설치해야 됨. 
+그리고 Linux 는 오픈되고, 커스터마이징 된 OS 이므로 Linux를 구입한 벤더에 따라 rpm 패키지가 다를 수 있음. 아래의 사이트 예시는 RedHat Linux에 대해 버그 Fix 관련 사이드임.
+Rpm -qa | cut -f2 -d ''
+
+< Red Hat 일 경우>
+Step 1. 다음의 사이트에서 해당 버전을 찾음
+http://www.redhat.com/security/updates/
+http://www.redhat.com/security/updates/eol/  (Red Hat Linux 9 이하 버전)
+
+Step 2. 발표된 Update 중 현재 사용중인 보안 관련 Update 찾음
+
+Step 3. 해당 Update 를 Download
+
+Step 4. Update 설치
+
+ # rpm -Uvh <package -name>
+
+[AIX] 
+# oslevel -r 명령어로 서버에 적용되어 있는 패치 리스트를 확인 또는 # instfix -I 또는 # lslpp -ha 
+
+[HP] 
+“swlist -l patch”로 서버에 적용되어 있는 패치 리스트를 확인함 
+
+[SUN] 
+$ showrev -p / # ls /var/sadm/patch 명령어를 통해 시스템에 설치된 패치에 대해 검색을 할 수 있다. 
+
+[LINUX] 
+Linux는 서버에 설치된 패치 리스트의 관리가 불가능함. 따라서 rpm 패키지별 버그 Fix된 최신의 버전을 설치해야 됨. 
+# rpm -qa | cut -f2 -d' '
+
+ [LINUX] 
+Linux는 서버에 설치된 패치 리스트의 관리가 불가능함. 따라서 rpm 패키지별 버그 Fix된 최신의 버전을 설치해야 됨. 
+
+# rpm -qa | cut -f2 -d' '

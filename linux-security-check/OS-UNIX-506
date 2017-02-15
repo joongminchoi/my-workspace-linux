@@ -1,0 +1,64 @@
+xntpd가 수행중이면 양호. NTP 활성화 여부 확인
+
+  [LINUX] 
+# vi /etc/ntp.conf 파일을 열고, 맨아랫부분에 broadcastclient 라는 항목을 # 주석처리 
+broadcastclient항목 밑에 server time_server_ip를 설정 (이 문서의 마지막에 있는 서버 리스트를 카피하여 추가) 
+# vi /etc/ntp.conf ~ 
+# Default NTP configuration file.
+# 
+# Broadcast client, no authentication. 
+# 
+#broadcastclient driftfile /etc/ntp.drift tracefile /etc/ntp.trace server ......... 
+
+ntp.conf 파일을 저장 후 타임 서버와 시간을 맞추는 프로그램인 ntpd 데몬을 실행한다. 
+# /etc/rc.d/init.d/ntpd start (stop, restart) 
+NTP 실행 확인 일단 ntpd를 실행한 후나 혹은 시스템 재시동 후 약 5분 정도가 지난 후에는 ntpq -p라는 
+명령어로 현재 NTP 서버로부터 제대로 시각에 관한 정보를 받고 있는지를 확인할 수 있다. 
+# /usr/sbin/ntpq -p 
+
+*LG전자 공식 시간서버 주소: ntp1.lg.co.kr
+
+[Ubuntu]
+1. ntp 설치 (이미 설치된 경우 스킵. 2로 이동)
+$ sudo apt-get install ntp 
+
+2. ntp 설정
+$ sudo vi /etc/ntp.conf (기존의 서버목록을 주석처리하거나 삭제하고 회사 공식 시간서버 사용) 
+ntp1.lg.co.kr
+
+3. ntp 서비스 재시작
+$ sudo service ntp restart
+
+4. ntp 시간동기화 확인
+$ sudo ntpq -p
+
+*LG전자 공식 시간서버 주소: ntp1.lg.co.kr
+
+
+[AIX] 
+# lssrc -s xntpd -> active확인 
+[HP] 
+# /sbin/init.d/xntpd status [SUN] # svcs -a | grep ntp => 기동전 disable 임을 확인 
+# svcs -a | grep ntp => 기동전 disable 임을 확인 
+disabled 3월_02 svc:/network/ntp4:default disabled 14:21:18 svc:/network/ntp:default 
+[LINUX] 
+# ntp -q -> 명령어로 현재 NTP 서버로부터 제대로 시각에 관한 정보를 받고 있는지 확인 
+# ps-ef|grep xntpd 로 확인
+
+  [LINUX] 
+# vi /etc/ntp.conf 파일을 열고, 맨아랫부분에 broadcastclient 라는 항목을 # 주석처리 
+broadcastclient항목 밑에 server time_server_ip를 설정 (이 문서의 마지막에 있는 서버 리스트를 카피하여 추가) 
+# vi /etc/ntp.conf ~ 
+# Default NTP configuration file.
+# 
+# Broadcast client, no authentication. 
+# 
+#broadcastclient driftfile /etc/ntp.drift tracefile /etc/ntp.trace server ......... 
+
+ntp.conf 파일을 저장 후 타임 서버와 시간을 맞추는 프로그램인 ntpd 데몬을 실행한다. 
+# /etc/rc.d/init.d/ntpd start (stop, restart) 
+NTP 실행 확인 일단 ntpd를 실행한 후나 혹은 시스템 재시동 후 약 5분 정도가 지난 후에는 ntpq -p라는 
+명령어로 현재 NTP 서버로부터 제대로 시각에 관한 정보를 받고 있는지를 확인할 수 있다. 
+# /usr/sbin/ntpq -p 
+
+*시간 동기화 서버 목록 gps.bora.net, +zero.bora.net, +ntp1.epidc.co.kr, *ntp2.epidc.co.kr

@@ -1,0 +1,8 @@
+/etc/aliases 0644 파일 내용중 decode Line 앞줄에 "#"이 있으면 양호
+
+[AIX] 
+1. /etc/aliases 의 내용 중 확인 /usr/bin/uudecode 주석 확인 
+2. telnet을 이용한 점검 % telnet target_host 25 VRFY debug 550 uudecode... User unknown <--- 존재하지 않을 경우 250 <--- 존재하는 경우
+
+ [AIX] 
+/etc/aliases 파일에서 decode 항목앞에 “#” 삽입시킨다. # decode: “/usr/bin/uudecode”

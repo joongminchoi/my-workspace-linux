@@ -1,0 +1,11 @@
+Wizard 패스워드 disable 일 경우 양호 “wizard” 패스워드를 알고 있는 사용자는 시스템의 sendmail 데몬에 접속하여 로그인 없이 shell을 실행시키므로 패스워드를 disable시켜야 한다
+
+[공통] 
+1. /etc/mail/sendmail.cf 의 내용 중 확인 Wizard 패스워드 disable 일 경우 OW* Wizard 패스워드 enable 일 경우 “abcd23DE” 이다 
+2. telnet을 이용한 점검 % telnet target_host 25 또는 tenlet localhost smtp wiz <- 입력 500 Command unrecognized <- 출력: wiz 명령이 제공되지 않는 경우 please pass,oh mighty wizard <- 출력: wiz 명령이 제공되는 경우
+
+ [공통] 
+wizard의 패스워드를 아래와 같이 disable 시킨다 
+/etc/sendmail.cf or /etc/mail/sendmail.cf 파일을 수정한다.
+ vi /etc/sendmail.cf 파일 Wizard 패스워드 disable OWabcd23DE로 변경 
+# Disallow wizard password OW*

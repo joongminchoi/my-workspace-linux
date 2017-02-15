@@ -1,0 +1,20 @@
+Root 계정의 PATH 환경변수에 “.” (현재 디렉터리 지칭)가 포함되어 있으며, root 계정의 인가자로 인해 비의도적으로 현재 디렉터리에 위치하고 있는 명령어가 실행될 수 있음. 즉 “.”이 /usr/bin 이나 /bin, /sbin 등 명령어들이 위치하고 있는 디렉터리보다 우선하여 위치하고 있을 경우, root 계정의 인가자가 어떠한 명령을 실행했을 때, 비인가자가 불법적으로 위치시킨 파일을 비의도적으로 실행하여, 예기치 않은 결과를 가져올 수 있음. 또한 “.” 뿐만 아니라 비인가자가 불법적으로 생성한 디렉터리를 우선적으로 가리키게 하여 예기치 않은 결과를 가져올 수 있음.
+
+Root 계정의 환경변수 설정파일(.profile, .cshrc 등)과 “/etc/profile”, 등에서 PATH 환경변수에 포함되어 있는 현재 디렉터리를 나타내는 “.”을 제거하기 바랍.
+(현재 디렉터리를 의미하는 “.”이 PATH 맨 앞이나 중가에 위치하면 안됨 -> 맨뒤로 옮기거나 제거)
+
+어플리케이션 구성상 “.”을 사용해야 하는 경우에는 “.”을 PATH 환경변수의 마지막으로 이동하도록 함.
+
+[공통] 
+환경설정 파일 PATH 설정에 "."이 포함되어있는지 점검 
+ /etc/profile /etc/bashrc /etc/bash.bashrc 
+ 사용자 HomeDir/.profile 
+ 사용자 HomeDir/.cshrc 
+ 사용자 HomeDir/.bashrc 
+ 사용자 HomeDir/.login
+
+ [공통] 
+환경설정 파일 PATH 설정에서 "."를 제거 
+ ex) vi 사용자/HomeDir/.profile => PATH=/usr/bin:/etc:/usr/sbin:/usr/ucb:$HOME/bin:/usr/bin/X11:/sbin:"." -> "." 제거 한다. 
+ 1. PATH 값 설정 root 계정의 환경 변수 설정 파일(.profile, .cshrc등)과 “/etc/profile” 등에서 PATH 환경 변수에 포함되어 있는 “.”을 제거한다.
+ 

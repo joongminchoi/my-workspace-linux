@@ -1,0 +1,29 @@
+smbd 프로세스 수행시
+/etc/samba/smb.conf    
+   [username]
+   comment = username 
+   path = /home/username 계정이 아닌 다른 이름으로 지정하도록 권고함
+
+sms.conf 위치 smbd -b |grep smb.conf
+
+또는
+
+[Linux]
+/etc/samba/smb.conf(패키지)
+/usr/local/samba/lib/smb.conf(컴파일 버전)
+
+[Sun]
+/opt/csw/etc/samba/smb.conf
+/etc/sfw/smb.conf
+
+[AIX]
+/opt/pware64/lib/smb.conf
+/opt/pware/lib/smb.conf
+/opt/pware/samba/<version>/smb.conf
+      -  /opt/pware/samba/3.0.26a/lib/smb.conf
+/usr/lib/smb.conf
+/usr/local/lib/smb.conf
+/usr/local/samba/lib/smb.conf
+
+[HPUX]
+/etc/opt/samba/smb.conf

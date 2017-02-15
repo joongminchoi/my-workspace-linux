@@ -1,0 +1,27 @@
+암호 없는 계정의 비활성화 점검을 통해 서버 접근 통제
+
+활성화된 ID중 암호가 없는 계정이 있으면 취약
+
+[AIX] 
+# cat /etc/security/user의 파일에 아래 사항을 확인 
+AUTH1=NONE이 지정되어 있는 사용자가 패스워드가 없는 사용자이다. 
+
+[HP-UX] 
+패스워드가 없는 ID를 검색한다. 
+# cat /etc/passwd 실행 계정의 두 번째 항목이 빈칸일 경우 패스워드를 설정해야 한다. 
+ ex) root::0:0::/:/sbin/sh (두 번째 항목 공백) 
+
+[SOLARIS] 
+패스워드가 없는 ID를 검색 
+# cat /etc/shadow | awk -F : ‘length($2) < 1 {print $1}’ 또는 logins -p 
+
+[LINUX] 
+1) # cat /etc/passwd 실행 
+2) 사용 계정의 두번째 항목에 빈칸일 경우 패스워드를 설정 해야함 
+ 예) 패스워드 없는 ID 예 - root::0:0::/:/sbin/sh (두번째 항목 공백) grep :: /etc/passwd
+
+계정에 암호를 설정하거나, 불필요한 ID일 경우 삭제 권고
+
+ [LINUX] 
+# vi /etc/shadow파일에서 해당 계정의 두번째 필드인 password필드에 “ * ” 을 삽입한다.
+ Ex) # cat /etc/shadow ………(중간 생략) domain:*:12359:0:99999:7::: anycast:*:12360:0:99999:7::

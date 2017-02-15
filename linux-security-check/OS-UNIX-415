@@ -1,0 +1,11 @@
+debug 명령어가 수행되면 취약
+
+[AIX/LINUX] 
+1. /etc/mail/sendmail.cf 의 내용 중 확인 Debug 확인 
+2. telnet을 이용한 점검 % telnet target_host 25 debug <- 입력 500 Command unrecognized <- 출력: debug 명령이 제공되지 않는 경우 200 Debug set <- 출력: debug 명령이 제공되고 있는 경우
+
+ [LINUX] 
+1. /etc/aliases파일에 대한 수정을 하고 시스템에 반영을 하기 위해서는 /usr/bin/newaliases을 실행시켜야 한다. 
+2. /etc/aliases파일은 시스템 관리자이외에 접근하지 못하도록 해야 한다. 
+3. /etc/aliases파일에는 644 권한이 부여되어야 한다. 
+4. /etc/aliases 파일에서 decode 항목앞에 “#” 삽입시킨다. # decode: “/usr/bin/uudecode”

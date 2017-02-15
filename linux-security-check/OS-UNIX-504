@@ -1,0 +1,20 @@
+/usr/adm/sulog 파일이 존재하고, sulog 관련 설정이 존재하면 양호
+
+[AIX] 
+/var/adm/sulog 파일 내용을 확인 
+# vi /var/adm/sulog 권한없는 계정 사용자가 root권한으로 su 하는지를 확인 
+[HP] 
+# vi /etc/default/su 파일을 아래와 같이 확인한다 
+SULOG=/var/adm/sulog (su관련 명령어는 sulog에 쌓이게 된다.) CONSOLE=/dev/console SYSLOG=yes 
+[SUN] 
+su 명령 사용 내역 기록은 /usr/adm/sulog 파일 내용에서 확인한다. 
+로그 파일 분석 
+예> - SU 07/09 09:52 + tb test-root - + : SU 성공 (실패는 - ) - hmcho-root : hmcho 계정에서 root로 su 권한없는 계정 사용자가 
+root권한으로 su 하는지를 확인한다. 
+[LINUX] 
+/etc/syslog.conf 파일에서 설정을 변경한다(sulog 또는 secure 파일) 
+#vi /etc/default/su SULOG=/var/log/sulog => 주석(#) 제거 
+또는 #vi /etc/syslog.conf authpriv.* /var/log/secure => 주석(#) 제거 syslogd를 재시작 한다 
+#service syslog restart(또는 stop 후 start) 
+※ auth.* => 보안 및 인증관련 (패스워드 변경, 계정의 세션 연결 및 해제) 
+※ authpriv.* => 개인적 보안 및 인증 관련 (패스워드 인증 성공/실패, 계정 추가/변경/삭제)

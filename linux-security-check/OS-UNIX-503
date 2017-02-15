@@ -1,0 +1,24 @@
+* 주요 시스템 로그 파일의 접근 권한이 아래와 같으면 양호 /etc/login.defs 파일 내 SULOG_FILE 0644 
+/var/adm/sulog 0640 
+/var/adm/lastlog 0644 
+/var/log/lastlog 0664 
+/etc/security/lastlog 0640 
+/etc/security/failedlogin 0644 
+/var/adm/utmp 0644 
+/var/adm/btmp 0660 
+/var/adm/wtmp 0664 
+/var/log/wtmp 0664 
+/var/run/utmp 0664 
+/var/log/btmp 0660 
+/var/log/pacct 0640 
+/var/log/messages 0640 
+/etc/wtmpx 0644 
+/etc/utmpx 0644 
+/var/adm/wtmpx 0644 
+/var/adm/utmpx 0644 
+/etc/utmp 0644
+
+[공통] 각 파일의 설정 권한이 644이하인지 점검
+
+[공통] 
+chmod 644 파일명

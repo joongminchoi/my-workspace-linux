@@ -1,0 +1,12 @@
+SNMP는 MIB이라는 정보를 주고 받기 위해 Community Name(비밀번호 같은 것)을 사용하는데 
+이것만 맞으면 정보를 주게 되어 있으므로 시스템이 community name의 디폴트 값인 “public”을 바꾸지 않고 사용하는 경우 
+MIB 정보가 노출될 가능성이 있음 악의적인 해커가 별도의 인증과정과 포트스캔, 핑거프린팅 기술을 사용하지 않고 
+snmpwalk와 같은 툴을 사용하여 내부 네트워크에 대한 주소정보와 Routing Table을 얻어 해킹을 위한 정보로 사용이 가능함 
+/etc/snmpd.conf /etc/snmp/snmpd.conf /etc/snmp/conf/snmpd.conf 설정 파일 내 public, private 있으면 취약
+
+[공통] 
+/etc/snmpd.conf /etc/snmp/snmpd.conf /etc/snmp/conf/snmpd.conf 설정 파일 내 public, private 을 사용 하는지 점검한다.
+
+[공통] 
+snmpd.conf파일에서 community name을 기본값인 public이 아닌 추측 불가능한 다른 이름으로 변경함 
+community name가 SNMP의 패스워드와 같은 역할을 하기 때문에 community name을 정하는 규칙은 패스워드를 생성하는 규칙과 동일함

@@ -1,0 +1,12 @@
+/var/adm/loginlog 파일이 존재하면 양호 /var/adm/loginlog 파일접근권한(600), root 소유여야 양호
+
+[AIX] 
+/etc/security/failedlogin 
+[SUN]
+ls -al /var/adm/loginlog
+
+ [LINUX] 
+/var/adm/loginlog 파일을 아래와 같이 생성한다 
+$ touch /var/adm/loginlog 
+$ chmod 600 /var/adm/loginlog 
+$ chown root /var/adm/loginlog

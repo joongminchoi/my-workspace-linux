@@ -1,0 +1,25 @@
+process lists 에서 sendmail 데몬 검사, port 25 listening 여부 검사하여 존재하면 취약
+
+[AIX] 
+"telnet 127.0.0.1 25" 명령어로 서비스 오픈 확인하거나 netstat -an | grep 25 명령어로 해당포트 사용중인지 확인 
+
+[HP] 
+"telnet 127.0.0.1 25" 명령어로 서비스 오픈 확인하거나 netstat -an | grep 25 명령어로 해당포트 사용중인지 확인 
+
+[SUN] 
+"telnet 127.0.0.1 25" 명령어로 서비스 오픈 확인하거나 netstat -an | grep 25 명령어로 해당포트 사용중인지 확인 
+
+[LINUX] 
+"telnet 127.0.0.1 25" 명령어로 서비스 오픈 확인하거나 netstat -an | grep 25 명령어로 해당포트 사용중인지 확인
+
+[LINUX] 
+시스템에서 인터넷 메일 서비스를 제공하지 않는 경우에는 sendmail 관련 
+스크립트인 /etc/rc.d/rc3.d/S80sendmail 이름을 다른 이름으로 변경하여 
+sendmail 서비스 데몬을 중지 
+service sendmail stop 
+# /etc/rc.d/init.d/sendmail stop 
+# mv /etc/rc.d/rc3.d/S80sendmail /etc/rc.d/rc3.d/s80sendmail 
+
+참고
+* Sendmail 데몬이 활성화 되지 않아도 아래와 같은 설정을 통해 매 시간 마다 메일을 보낼수는 있음(받기는 불가능) 
+root 사용자의 crontab 에 아래와 같은 라인을 추가 0 * * * * /usr/lib/sendmail -q

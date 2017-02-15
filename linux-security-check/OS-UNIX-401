@@ -1,0 +1,19 @@
+서비스 관련 파일을 관리자가 아닌 일반사용자들이 접근 및 변경 가능하면 이를 통해 정상적인 서비스를 제한 하거나 허용되지 않은 서비스를 실행시키셔 침해사고의 위험이 있음.
+
+* 서비스 관련 파일의 접근 권한이 아래와 다르면 취약 
+/etc/services 0644 
+/etc/hosts 0664 
+/etc/xinetd.conf 0664 
+/etc/snmp/conf/snmpd.conf 0644 
+/etc/inittab 0644
+/etc/inetd.conf 0644 
+/etc/services 0644 
+/etc/inet/hosts 0644 
+/etc/inet/inetd.conf 0644 
+/etc/inet/services 0644
+
+[공통] 
+각 파일의 설정 권한 점검
+
+ [공통] 
+chmod 644 파일명

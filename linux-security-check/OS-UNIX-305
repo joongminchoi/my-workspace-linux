@@ -1,0 +1,15 @@
+홈 디렉터리 내의 환경변수 파일 권한이 적절히 설정되어 있는지 점검. 환경변수 파일의 접근권한 설정이 잘못되어 있을 경우 비인가자가 다양한 방법으로 사용자 환경을 벼경하여 침해사고를 일으킬 수 있음.
+
+- “profile”, “.kshrc”, “.cshrc”, “.bashrc”, “.bash_profile”, “.login”, “.exrc”, “.netrc”, “.dtprofile”, “.Xdefaults” 등 환경변수 파일의 타사용자 쓰기 권한을 제거. 
+
+* group,other 사용자에게 쓰기권한, 실행권한이 있을경우 취약 
+.profile 0644 .cshrc 0644 .login 0644 .netrc 0644 .bash_profile 0644 .bashrc 0644 .bash_logout 0644
+
+[공통]
+ ls -l "파일경로" 명령어로 사용자 HOME 디렉토리 파일에 대해 접근권한 확인
+
+ [공통] 
+점검 결과 위의 파일에 기본 모드가 아닐 경우 변경한다
+   # chmod o-w [파일명]
+
+chmod 644 "파일경로" 명령어로 접근권한 변경

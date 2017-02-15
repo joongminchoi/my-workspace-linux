@@ -1,0 +1,14 @@
+서버에 불필요한 서비스 Port들이 열려 있는 경우 주요 시스템 정보 노출 및 서비스 거부(DOS)를 야기시킬 수 있음.
+
+* finger, rusersd, rstatd 서비스를 사용하면 취약
+
+[AIX/HP-UX/SOLARIS] 
+/etc/inetd.conf 파일에서 아래의 불필요한 서비스항목을 Remark(#) 처리되었는지 확인
+ 
+[LINUX] 
+리눅스 7.X 이상은 xinetd를 사용하므로 chkconfig --list 으로 서비스 확인
+
+  [LINUX] 
+1. /etc/xinetd.d/xxxx 파일 수정 
+2. disable = no 수정 
+3. service xinetd restart

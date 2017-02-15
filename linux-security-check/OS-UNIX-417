@@ -1,0 +1,13 @@
+Banner message 를 통해서 smtp 버전과 종류 그리고 운영체제에 관한 정보를 알 수 있으므로 버전정보를 통한 공격의 위험성이 있음 
+[공통] 
+서비스 배너 정보를 점검하여 OS정보, 서비스 버전이 노출되는지 확인한다. 
+불법적인 접근을 경고하는 보안 배너를 삽입하고, 시스템 버전 정보 등의 유출을 막는다. 
+보안경고문자열: “Warning!! Authorized users only. All activity may be monitored and reported.”
+
+"/etc/sendmail.cf", "/etc/mail/sendmail.cf" 파일에서 SmtpGreetingMessage 항목 내용을 확인 $v $Z VERSION 존재하면 FAIL
+
+ [SMTP] 
+smtp banner 제거 "/etc/sendmail.cf" 또는 "/etc/mail/sendmail.cf" 버전 정보를 삭제 한다. 
+예시 
+# vi /etc/mail/sendmail.cf 에서 메시지 모두 삭제 O SmtpGreetingMessage= 그리고 배너보안 문구 설정이 안 되어 있다면, 아래의 내용을 삽입한다. 
+”Authorized users only. All activity may be monitored and reported.”

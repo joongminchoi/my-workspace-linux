@@ -1,0 +1,39 @@
+mbd 프로세스 수행시
+etc/samba/smb.conf 의   writable = no 이거나 
+                                  writable 없는 경우 read only = yes 로 설정
+                     "read only="  는 "read only=no" 와 동일
+                     "writable=" 는 "writable=no" 와 동일
+
+sms.conf 위치 smbd -b |grep smb.conf
+
+또는
+
+[Linux]
+/etc/samba/smb.conf(패키지)
+/usr/local/samba/lib/smb.conf(컴파일 버전)
+
+[Sun]
+/opt/csw/etc/samba/smb.conf
+/etc/sfw/smb.conf
+
+[AIX]
+/opt/pware64/lib/smb.conf
+/opt/pware/lib/smb.conf
+/opt/pware/samba/<version>/smb.conf
+      -  /opt/pware/samba/3.0.26a/lib/smb.conf
+/usr/lib/smb.conf
+/usr/local/lib/smb.conf
+/usr/local/samba/lib/smb.conf
+
+[HPUX]
+/etc/opt/samba/smb.conf
+
+1. writable이 있는경우
+writable=yes인 경우만 FAIL
+writable= 이거나 아무거나 있으면 PASS
+
+2. writable이 없는 경우
+   read only=yes인 경우만 PASS
+   read only= 이거나 아무거나 있으면 FAIL
+
+3.writable, read only 설정 둘다 없으면 PASS

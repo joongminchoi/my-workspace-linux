@@ -1,0 +1,29 @@
+패스워드 추측 공격을 피하기 위하여 패스워드 최근 사용 기억 여부 설정 점검
+
+최근 패스워드 기억 설정이 존재하고 값은 1이상으로 설정되어야 양호
+
+[AIX] 
+/etc/security/user 파일을 점검. 
+# cat /etc/security/user | grep -i histsize 
+
+[HP-UX] 
+/etc/default/security 파일을 점검 
+# cat /etc/default/security | grep -i PASSWORD_HISTORY_DEPTH 
+
+[SOLARIS] 
+/etc/default/passwd 파일을 점검 
+# cat /etc/default/passwd | grep HISTORY 
+
+[LINUX] 
+# cat /etc/pam.d/system-auth 파일을 점검(권고사항 확인).
+
+[LINUX]
+    아래와 같이 remember 파라메터의 값이 1이상 설정 한다.
+    /etc/pam.d/system-auth password remember=1
+    
+[Ubuntu]
+/etc/common-passwd 파일에 아래의 라인을 추가한다.
+password      requisite                 pam_pwhistory.so remember=1
+
+주의) 
+위의 라인은 “Enter” 없이 추가되어야 한다. 작업 전에는 반드시 백업 파일을 생성하고, 기존 root 창을 연결한 상태에서 신규 터미널에서 테스트를 하여 정상 여부를 확인한다.

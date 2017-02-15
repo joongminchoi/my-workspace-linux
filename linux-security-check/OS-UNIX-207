@@ -1,0 +1,41 @@
+패스워드 추측 공격을 피하기 위하여 취약한 패스워드 사용 점검
+
+해당파일에 어려운 패스워드 강제 적용 설정이 존재해야 양호 (영문 대,소문자 구분없이 2문자, 숫자 2개, 특수문자 1개) 
+AIX: /etc/security/user 
+HP: /etc/default/security 
+SOLARIS : /etc/default/passwd 
+리눅스: /etc/pam.d/system-auth (lcredit,dcredit,ocredit) 설정
+
+[AIX] 
+# cat /etc/security/user 
+
+[HP] 
+#cat /etc/default/security 
+
+[SUN] 
+#cat /etc/default/passwd 
+
+[LINUX] 
+/etc/pam.d/system-auth
+# grep password /etc/pam.d/system-auth
+(lcredit(2이상) dcredit(2이상) ocredit(1이상 PASS))
+
+[Ubuntu]
+/etc/pam.d/common-password
+password  lcredit  dcredit ocredit
+
+[LINUX] 
+#cat /etc/pam.d/system-auth
+
+[LINUX]
+    /etc/pam.d/system-auth (lcredit,dcredit,ocredit) 설정
+
+[Ubuntu]
+/etc/pam.d/common-password 파일에 아래와 같이 설정.
+    password        requisite                       pam_cracklib.so retry=3 minlen=8 difok=3 lcredit=2 dcredit=2  ocredit=1
+ 
+주의)
+위의 pam_cracklib.so 라인에 lcredit, dcredit, ocredit 항목을 추가한다. 주의할 점은 1라인 추가해도 “Enter”를 입력하여 추가하면 안되고 반드시 이어서 추가하여야 한다.
+    Lcredit = 소문자 2자이상.
+    Dcredit = 숫자 2자 이상
+   Ocredit = 특수문자 1이상

@@ -1,0 +1,39 @@
+권한이 없는 일반 사용자가 su 명령을 사용한 Password Guessing을 통해 root 권한을 획득 할 수 있음
+
+일반 사용자의 su 명령 사용을 제한함.(wheel 그룹만 su 명령 사용을 가능하게 할 경우)
+
+su 명령어가 모든 사용자에게 실행권한이 있을 경우 취약 /usr/bin/su 파일의 권한이 4750이 아니면 취약
+
+[AIX/HP-UX/SOLARIS/LINUX] 
+# /bin/su, /usr/bin/su 파일의 권한이 4750보다 크면 FAIL 
+
+[LINUX] 
+/etc/pam.d/su 파일에 auth required /lib/security/pam_wheel.so use_uid 있거나 auth required pam_wheel.so use_uid 있거나 
+auth required /lib/security/$ISA/pam_wheel.so use_uid 있으면 PASS 
+( auth required pam_wheel.so use_uid 존재 확인) 위 항목이 존재하지 않고 /bin/su, /usr/bin/su 파일의 권한이 4750보다 크면 FAIL
+
+[AIX/HP-UX/SOLARIS/LINUX]
+root user로 /bin/su 파일의 모드를 변경
+# chmod 4750 /bin/su
+
+su 권한이 필요한 경우에는 Group에 root user switch 그룹을 등록하여 사용하기를 권고.
+
+[LINUX] [Ubuntu]
+/etc/pam.d/su 파일을 아래와 같이 설정.
+변경전)
+#auth       required   pam_wheel.so
+auth       required     pam_wheel.so
+주석 제거 후 저장
+
+1)  wheel group 생성 (기 생성되어 있으면 생략)
+# groupadd wheel
+
+2)  /etc/login.defs 파일에 아래 내용 추가. ？ 주의:페도라코어 4이상만 적용
+SU_WHEEL_ONLY  yes
+
+3) /etc/group 파일에서 wheel 그룹에 su 명령어를 사용할 사용자를 추가
+# useradd ？G wheel username
+# cat /etc/group
+wheel:x:1001:root,itops
+
+위와 같이 wheel 그룹에 su를 허용할 userid가 추가 되어 있는지 확인한다.

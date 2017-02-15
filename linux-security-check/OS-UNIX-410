@@ -1,0 +1,13 @@
+/etc/exports 0644 root 이상이면 취약
+
+[AIX] 
+"ls -al /etc/exports" 명령어로 파일접근권한 확인
+ 
+[HP-UX] 
+"ls -al /etc/exports" 명령어로 파일접근권한 확인
+ 
+[SOLARIS] 
+"ls -al [파일경로]" 명령어로 파일접근권한 확인 /etc/dfs/dfstab [LINUX] "ls -al /etc/exports" 명령어로 파일접근권한 확인
+
+  [[LINUX]
+ "chmod 644 /etc/exports" 명령어로 파일접근권한 변경

@@ -1,0 +1,21 @@
+process lists 에서 syslog 데몬 존재하고 /etc/[a-z]*syslog.conf 0644 이하 /var/adm/syslog/*.log 퍼미션 600
+
+[AIX] ps -ef | grep syslogd 확인 
+[HP] 
+[SUN] 
+[LINUX]
+
+[LINUX-Ubuntu]
+아래의 설정 파일을 확인한다.
+# vi /etc/rsyslog.d/50-default.conf
+# cron.*                          /var/log/cron.log
+
+ [AIX]
+ [HP] 
+[SUN] 
+[LINUX]
+
+[LINUX-Ubuntu]
+아래의 설정 파일을 확인 후 주석 부분을 없앤다.
+# vi /etc/rsyslog.d/50-default.conf
+cron.*                          /var/log/cron.log

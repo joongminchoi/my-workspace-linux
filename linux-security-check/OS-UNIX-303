@@ -1,0 +1,27 @@
+각각의 사용자의 홈 디렉터리내의 파일을 인가되지 않은 사용자가 접근하여 설정파일 및 파일을 변조하게 되면 정상적인 사용자의 서비스가 제한됨, 해당 홈 디렉터리의 계정 외의 일반 사용자들이 해당 홈 디렉터리를 수정 할 수 없도록 제한하고 있는지 점검
+
+사용자 계정 $HOME 디렉터리가 존재하지 않으면 취약
+
+root, OS Default 계정은 예외처리 함.
+APP user의 경우 예외처리 함
+'compact mode' 설정 시 예외 처리함 
+link연결 여부 확인 주의 연결이 끊어 져 있을 경우 not found 발생
+
+
+[공통] 
+# cat /etc/passwd 파일에서 사용자 HOME 디렉토리 확인하고 해당 디렉토리가 존재하는지 확인
+
+ [공통] 
+사용자 HOME 디렉토리를 생성하고 권한부여한다.
+
+[예시]
+passwd 파일 내
+korea:x:1000:1000:korea,,,:/home/korea:/bin/bash
+위와 같이 되어 있는 경우
+
+1) Linux 서버의 root 계정으로 로그인 한 후 아래와 같이 진행 한다.
+    # cd /home
+    # mkdir korea
+    # chown korea korea 
+    # chgrp ???? korea
+    위의 group 값 ???? 은 password 파일 내의 group id 값을 /etc/group 파일내에서 찾을 수 있다.

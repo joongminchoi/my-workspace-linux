@@ -1,0 +1,19 @@
+패스워드가 암호화되어 저장되는 shadow 파일의 사용을 권고함.
+
+쉐도우 패스워드 파일을 사용하지 않으면 취약 /etc/shadow 파일권한이 400이 아니면 취약
+
+[AIX] 
+/etc/security/passwd 파일 존재 여부 및 파일권한 확인 
+
+[HP-UX/SOLARIS/LINUX] 
+/etc/shadow 파일 존재 여부 및 파일권한 확인
+
+ [LINUX] 
+C2 Level이 적용되어 있지 않다면 
+1. shadow화 # pwconv 명령을 이용하여 /etc/shadow 파일을 생성 
+
+2. /etc/shadow 파일의 권한을 root 소유의 “400”으로 설정 
+   # chown root /etc/shadow 
+    # chmod 400 /etc/shadow
+    # 중요 : Terminal login 상태에서 Terminal을 하나 더 Open 하여 조치를 하고, 로그인이 제대로 되는지 점검 해야 한다.
+                로그인이 안될 경우 기존과 같은 모드로 원복을 하고, 점검 "예외" 요청을 한다

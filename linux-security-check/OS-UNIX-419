@@ -1,0 +1,10 @@
+설정파일 권한이 아래와 다르면 취약 
+/etc/snmpd.conf 0644 
+/etc/snmp/snmpd.conf 0644 
+/etc/snmp/conf/snmpd.conf 0644
+
+[AIX/SUN] 
+각 파일의 설정 권한 확인
+
+[AIX/SUN] 
+chmod 644 파일경로

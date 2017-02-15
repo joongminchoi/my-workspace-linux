@@ -1,0 +1,31 @@
+패스워드 추측 공격을 피하기 위하여 패스워드 최대 사용기간 설정이 되어 있는지 점검. 패스워드가 임의의 경로를 통해 유출되었을 때, 임의로 접속한 사용자가 언제든 다시 접속 할 수 있는 환경을 방지하기 위해 패스워드 날짜 제한을 점검함.
+
+계정 암호의 최대 사용 기간은 60일 보다 크면 취약
+
+[AIX] 
+# cat /etc/security/user 파일 값 확인 maxage=8 (“주단위”로 설정 가능 ) 
+
+[HP-UX] 
+# cat /etc/default/security 파일을 점검 
+PASSWORD_MAXDAYS=60 # cat /etc/shadow 를 Root권한으로 
+실행 모든 계정에 대해서 shadow파일의 4번째 항목을 1, 5번째 60, 6번째 7, 7번째 항목을 60으로 설정 
+ ex) proj:1ybmsdEebTOhl:9976:1:60:7:60:: 
+
+[SOLARIS] 
+# cat /etc/default/passwd 파일을 점검 
+MAXWEEKS=8 # cat /etc/shadow 를 Root권한으로 
+실행 모든 계정에 대해서 shadow파일의 4번째 항목을 1, 5번째 30, 6번째 7, 7번째 항목을 30으로 설정 
+ ex) proj:1ybmsdEebTOhl:9976:1:60:7:60:: 
+
+[LINUX] 
+# cat /etc/login.defs 파일을 점검합니다. 
+PASS_MAX_DAYS 60 (최대사용기간 설정 단위:일)
+
+ [LINUX] 
+1)  /etc/login.defs 파일을 아래와 같이 설정.
+변경 전)
+PASS_MAX_DAYS   99999
+변경 후)
+PASS_MAX_DAYS   60
+
+위와 같이 패스워드 최대 사용기간을 60일 이내로 설정한다.

@@ -1,0 +1,12 @@
+/etc/sendmail.cf, /etc/mail/sendmail.cf 설정 내 PrivacyOptions=goaway 없으면 취약 (SMTP 사용 시 EXPN, VRFY 명령어 사용가능하면 취약) 
+sendmail 데몬을 이용하여 내부 사용자 계정의 정보를 획득할 수 있으며 원격에서 시스템의 중요정보를 획득할 수 있음
+
+[공통] 
+1. /etc/mail/sendmail.cf 의 내용 중 확인 PrivacyOptions 확인
+
+ [공통] 
+sendmail의 설정 파일인 sendmail.cf 파일에서 PrivacyOption 부분을 다음과 같이 설정합니다. 
+# vi /etc/mail/sendmail.cf ~ 
+# privacy flags /etc/sendmail.cf, 
+/etc/mail/sendmail.cf 설정내 O PrivacyOptions=authwarnings,noexpn,novrfy 존재하면 PASS
+ (단 , sendmail 데몬 구동중인 경우) 또는 O PrivacyOptions=goaway

@@ -1,0 +1,30 @@
+파일의 설정 상의 문제점이나 파일 permission등을 진단하여 관리자의 관리상의 실수나 오류로 발생할 수 있는 침해사고(일반 사용자 권한 /root 권한 획득)의 위험성을 진단.
+
+각 파일의 접근권한을 "ls -l" 명령어로 확인
+
+* 사용자 계정 파일의 접근 권한이 아래 보다 크면 취약
+/etc/group, -rw-r--r--
+/etc/csh.cshrc, -rw-r-xr-x
+/etc/csh.login, -rw-r-xr-x
+/etc/passwd, -rw-r--r--
+/etc/security/group, -rw-r-----
+/etc/security/passwd, -rw-------
+/etc/shadow, -rw-r-----
+/tcb/files/auth/r/root, -rw-------
+/etc/logingroup, -rw-r--r―
+
+위의 파일에 대해 위의 기본 접근 보다 클 경우 아래의 command를 이용하여 각 파일의 모드를 변경한다.
+
+chmod 명령어로 접근권한 변경
+
+# chmod 644 /etc/passwd
+
+/etc/group 0644 
+/etc/csh.cshrc 0644 
+/etc/csh.login 0644 
+/etc/passwd 0644 
+/etc/security/group 0640 
+/etc/security/passwd 0600 
+/etc/shadow 640 
+/tcb/files/auth/r/root 600 
+/etc/logingroup 0644
